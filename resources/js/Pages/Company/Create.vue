@@ -67,10 +67,7 @@
                         </div>
                     </form>
 
-                    <p class="text-xs text-center text-gray-500">
-                        &copy; {{ $page.props.currentYear }} - <a class="text-blue-500"
-                            href="https://github.com/perisicnikola37" target="_blank">@{{ $page.props.companyname }}</a>
-                    </p>
+                    
                 </div>
             </div>
         </div>

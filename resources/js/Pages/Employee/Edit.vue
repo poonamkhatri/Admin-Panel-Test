@@ -1,23 +1,37 @@
 <template>
-    <AppLayout title="Edit company">
+    <AppLayout title="Update Employee">
 
         <template #header>
-            <Breadcrumb :href="'companies'" :title="'companies'" :property="company" />
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                Update Employee
+            </h2>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="w-full max-w-xs m-auto">
-                    <form @submit.prevent="submit" class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
 
-                         <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
-                                Name <span class="text-red-500">*</span>
+                    <form @submit.prevent="submit" class="px-8 pt-6 pb-8 m-auto mb-4 bg-white rounded shadow-md"
+                        enctype="multipart/form-data">
+
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="first_name">
+                               First Name <span class="text-red-500">*</span>
                             </label>
-                            <input v-model="form.name"
+                            <input v-model="form.first_name"
                                 class="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                id="name" type="text">
-                            <span class="text-red-500">{{ errors.name }}</span>
+                                id="first_name" type="text">
+                            <span class="text-red-500">{{ errors.first_name }}</span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="last_name">
+                               Last Name <span class="text-red-500">*</span>
+                            </label>
+                            <input v-model="form.last_name"
+                                class="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="first_name" type="text">
+                            <span class="text-red-500">{{ errors.last_name }}</span>
                         </div>
 
                         
@@ -30,6 +44,27 @@
                                 id="email" type="email">
                             <span class="text-red-500">{{ errors.email }}</span>
                         </div>
+
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="compnany_id">
+                                Select Company Name <span class="text-red-500">*</span>
+                            </label>
+                            <select name="company_id" id="company_id" v-model="form.company_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                                <option v-for="company in companies" :key="company.id" :value="company.id" >{{company.name}}</option>
+                            </select>
+                            <span class="text-red-500">{{ errors.company_id }}</span>
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="phone">
+                               Phone Number <span class="text-red-500">*</span>
+                            </label>
+                            <input v-model="form.phone"
+                                class="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="phone" type="text">
+                            <span class="text-red-500">{{ errors.phone }}</span>
+                        </div>
 						
 						
 						
@@ -40,67 +75,50 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="logo">
-                                Logo <span class="text-red-500">*</span>
-                            </label>
-                            <input type="file" id="logo" v-on:change="form.logo = $event.target.files[0]">
-                            <span class="text-red-500">{{ errors.logo }}</span>
-                        </div>
+                        
 
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="website">
-                                Website <span class="text-red-500">*</span>
-                            </label>
-                            <input v-model="form.website"
-                                class="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                id="website" type="text">
-                            <span class="text-red-500">{{ errors.website }}</span>
-                        </div>
-
+                        
 
                         <div class="flex items-center justify-between">
                             <Button :form="form"></Button>
                         </div>
                     </form>
-                    <p class="text-xs text-center text-gray-500">
-                        &copy; {{ $page.props.currentYear }} - <a class="text-blue-500"
-                            href="https://github.com/perisicnikola37" target="_blank">@{{ $page.props.companyname }}</a>
-                    </p>
-                </div>
 
+                   
+                </div>
             </div>
         </div>
     </AppLayout>
 </template>
 
 <script>
-import Breadcrumb from "@/Components/Breadcrumb.vue";
-import Button from "@/Components/Button.vue";
+import Button from '@/Components/Button.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 export default {
     components: {
         AppLayout,
-        Breadcrumb,
-        Button
+        Button,
     },
     props: {
-        company: Object,
+        errors: Object,
     },
     data() {
         return {
             form: this.$inertia.form({
-                name: this.company.name,
-                email: this.company.email,
+                first_name: '',
+                last_name: '',
+                email: '',
+                company_id: '',
+                phone: '',
             })
         }
     },
     methods: {
         submit() {
-            this.form.put(this.route('companies.update', this.company.id), {
+            this.form.post(this.route('employees.update'), {
                 _token: this.$page.props.csrf_token,
-            })
+            });
         }
     }
 }

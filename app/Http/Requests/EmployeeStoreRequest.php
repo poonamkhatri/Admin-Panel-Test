@@ -26,7 +26,7 @@ class EmployeeStoreRequest extends FormRequest
             'last_name' => 'required|min:2|max:255',
             'email' => 'required|email|max:255|unique:employees',
             'company_id' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|digits:10',
         ];
     }
 }

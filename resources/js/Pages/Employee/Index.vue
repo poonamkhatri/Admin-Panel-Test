@@ -4,14 +4,14 @@
 		<template #header>
 			<h2 class="flex justify-between text-xl font-semibold leading-tight text-gray-800">
 				<p>
-					employees
+				   Employees
 					<i class="fa-solid fa-company-group"></i>
 				</p>
 
 				<inertia-link href="employees/create">
 					<a
 						class="px-4 py-2 mr-3 text-sm text-green-600 transition border border-green-300 rounded-full hover:bg-green-600 hover:text-white hover:border-transparent">Create
-						company</a>
+						Employee</a>
 				</inertia-link>
 
 			</h2>
@@ -94,14 +94,14 @@
 							</tr>
 						</thead>
 						<tbody class="bg-white divide-y divide-gray-200">
-							<tr v-for="company in employees.data" :key="company.id">
+							<tr v-for="employee in employees.data" :key="employee.id">
 								<td>
-									<input type="checkbox" v-model="selectedemployees" :value="company.id"
+									<input type="checkbox" v-model="selectedemployees" :value="employee.id"
 										class="ml-5 outline-none" />
 								</td>
 								<td class="px-6 py-4 whitespace-nowrap">
 									<div class="text-sm text-center text-gray-900">
-										{{ company.id }}
+										{{ employee.id }}
 									</div>
 								</td>
 								
@@ -111,14 +111,26 @@
 										<div class="ml-4">
 											<div class="text-sm font-medium text-gray-900">
 												<inertia-link class="transition hover:text-blue-500"
-													:href="`employees/${company.id}`">{{ company.name }}</inertia-link>
+													:href="`employees/${employee.id}`">{{ employee.first_name }}</inertia-link>
+											</div>
+										</div>
+									</div>
+								</td>
+
+								<td class="px-6 py-4 whitespace-nowrap">
+									<div class="flex items-center justify-center">
+
+										<div class="ml-4">
+											<div class="text-sm font-medium text-gray-900">
+												<inertia-link class="transition hover:text-blue-500"
+													:href="`employees/${employee.id}`">{{ employee.last_name }}</inertia-link>
 											</div>
 										</div>
 									</div>
 								</td>
 								<td class="px-6 py-4 whitespace-nowrap">
 									<div class="text-sm text-center text-gray-900">
-										<a :href="'mailto:' + company.email">{{ company.email }}</a>
+										<a :href="'mailto:' + emloyee.email">{{ employee.email }}</a>
 									</div>
 								</td>
 								
@@ -128,7 +140,7 @@
 										<div class="ml-4">
 											<div class="text-sm font-medium text-gray-900">
 												<inertia-link class="transition hover:text-blue-500"
-													:href="`employees/${company.id}`">{{ company.website }}</inertia-link>
+													:href="`employee/${employee.id}`">{{ company.phone }}</inertia-link>
 											</div>
 										</div>
 									</div>
@@ -137,12 +149,12 @@
 								<td class="px-6 py-4 text-center whitespace-nowrap">
 									<span
 										class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-										{{ company.formatted_created_at }}
+										{{ employee.formatted_created_at }}
 									</span>
 								</td>
 								<td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
 
-									<inertia-link :href="`/employees/${company.id}/edit`"
+									<inertia-link :href="`/employees/${employee.id}/edit`"
 										class="float-left px-4 py-2 text-green-400 duration-100 rounded hover:text-green-600">
 										<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
 											viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +162,7 @@
 												d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
 										</svg></inertia-link>
 
-									<a href="#" @click="deletecompany(company)"
+									<a href="#" @click="delete(employee)"
 										class="float-left px-4 py-2 ml-2 text-red-400 duration-100 rounded hover:text-red-600">
 										<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
 											viewBox="0 0 24 24" stroke="currentColor">

@@ -45,8 +45,8 @@ class CompanyController extends Controller
         $validatedData = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $avatarPath = $request->file('logo')->store('public/logos');
-            $validatedData['avatar'] = Storage::url($avatarPath);
+            $logoPath = $request->file('logo')->store('public/logos');
+            $validatedData['logo'] = Storage::url($logoPath);
         }
         
         Company::create($validatedData);

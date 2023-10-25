@@ -5,15 +5,14 @@
                 <img class="object-cover w-full h-64" :src="user.coverImage" alt="Logoe">
                 <div class="p-4">
 
-                    <img class="w-24 h-24 mx-auto mb-4 rounded-full" :src="companyLogo" alt="Logo profile image">
+                   
 
-                    <h1 class="text-2xl font-bold text-center">{{ getCompany.name }}</h1>
+                    <h1 class="text-2xl font-bold text-center">{{ getEmployee.first_name }}</h1>
+                    <h1 class="text-2xl font-bold text-center">{{ getEmployee.last_name }}</h1>
                     <center>
-                        <a :href="'mailto:' + getCompany.email" class="text-center text-gray-600">{{ getCompany.email }}</a>
+                        <a :href="'mailto:' + getEmployee.email" class="text-center text-gray-600">{{ getEmployee.email }}</a>
                     </center>
-					<center>
-                        <a :href=":' + getCompany.website" class="text-center text-gray-600">{{ getCompany.website }}</a>
-                    </center>
+					<h1 class="text-2xl font-bold text-center">{{ getEmployee.phone }}</h1>
                     <hr class="my-4">
                     
                 </div>
