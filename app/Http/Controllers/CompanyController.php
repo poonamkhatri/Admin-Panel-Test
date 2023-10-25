@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\CompanyEmail;
 use Inertia\Inertia;
 
 class CompanyController extends Controller
@@ -49,6 +50,9 @@ class CompanyController extends Controller
         }
         
         Company::create($validatedData);
+        
+        $messages["Hello"] = "New Company: {$validatedData->name}";
+        $validatedData->notify(new CompanyEail($messages));
 
         return redirect()->route('companies.index')->with('success', 'Company has been created successfully!');
     }

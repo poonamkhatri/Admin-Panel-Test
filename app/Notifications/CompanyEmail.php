@@ -17,7 +17,7 @@ class CompanyEmail extends Notification
      */
     public function __construct()
     {
-        $this->company      = $company;
+       
     }
 
     /**
@@ -36,9 +36,8 @@ class CompanyEmail extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Company has been created.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you!');
+                ->line($this->messages['Hello'])
+                ->line('Thank you!');
     }
 
     /**
