@@ -1,2 +1,4 @@
-# Mini-Admin-Panel
+# Laravel Admin Panel with Jetstream, Inertia.js, and Vue.js
+
+
  
